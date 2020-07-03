@@ -1,0 +1,6 @@
+<div class="py-4 text-center">
+    <mat-progress-spinner mode="determinate" [value]="progress" class="mx-auto"></mat-progress-spinner>
+    <h2>Progress : {{ progress }} %</h2>
+    <p>Keep Going, You Can Do It!</p>
+    <button mat-raised-button color="warn" (click)="onStop()">Stop Training</button>
+</div>

@@ -1,0 +1,50 @@
+<div class="sign-up">
+    <div class="row h-100">
+        <div class="col-12 my-auto">
+            <div class="text-center">
+                <label class="text-primary">Sign Up For Fitness Tracker</label>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)">
+                        <div class="form-group">
+                            <mat-form-field>
+                                <input type="email" matInput placeholder="Email ID" ngModel name="email" email required
+                                    #emailInput="ngModel">
+                                <mat-error *ngIf="emailInput.hasError('required')">Email is Required!</mat-error>
+                                <mat-error *ngIf="!emailInput.hasError('required')">Email is Invalid!</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field>
+                                <input type="password" matInput placeholder="Password" ngModel name="password" required
+                                    minlength="6" #passwordInput="ngModel">
+                                <mat-hint align="end">Length : {{ passwordInput.value?.length }}</mat-hint>
+                                <mat-error *ngIf="passwordInput.hasError('required')">Password is Required!</mat-error>
+                                <mat-error *ngIf="!passwordInput.hasError('required')">Password Should Be Atleast 6
+                                    Characters Long!</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field>
+                                <input matInput placeholder="Date of Birth" [matDatepicker]="dateOfBirth"
+                                    [max]="maxDate" ngModel name="birthDate" required #dateOfBirthInput="ngModel">
+                                <mat-datepicker-toggle matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
+                                <mat-datepicker #dateOfBirth></mat-datepicker>
+                                <mat-error *ngIf="dateOfBirthInput.hasError('required')">Date of Birth is Required!</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <mat-checkbox ngModel name="terms" required color="primary">Agree To Terms and Conditions</mat-checkbox>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" mat-raised-button color="primary" [disabled]="signUpForm.invalid">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+    </div>
+</div>
