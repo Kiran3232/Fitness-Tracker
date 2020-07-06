@@ -10,8 +10,8 @@ import { Subscription } from 'rxjs';
 export class SidenavListComponent implements OnInit, OnDestroy {
 
   @Output()
-  sideNavToggle = new EventEmitter<void>()
-  isLoggedIn: boolean = false;
+  sideNavToggle = new EventEmitter<void>();
+  isLoggedIn = false;
   authSubscription: Subscription;
 
   constructor(
@@ -19,13 +19,15 @@ export class SidenavListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnDestroy(): void {
-    this.authSubscription.unsubscribe();
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
   }
 
   ngOnInit(): void {
     this.authSubscription = this.authService.authChange.subscribe((authStatus) => {
       this.isLoggedIn = authStatus;
-    })
+    });
   }
 
   toggleSideNav() {

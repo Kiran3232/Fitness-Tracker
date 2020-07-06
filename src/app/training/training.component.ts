@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TrainingService } from './training.service';
+import { Exercise } from './exercise.model';
 
 @Component({
   selector: 'app-training',
@@ -11,6 +12,8 @@ export class TrainingComponent implements OnInit {
 
   ongoingTraining = false;
   trainingSubscription: Subscription;
+  pastExerciseSubscription: Subscription;
+  countPastExercise: number;
 
   constructor(
     private trainingService: TrainingService
@@ -24,6 +27,9 @@ export class TrainingComponent implements OnInit {
       else {
         this.ongoingTraining = false;
       }
+    });
+    this.pastExerciseSubscription = this.trainingService.pastExercisesChanged.subscribe((exercises: Exercise[]) => {
+      this.countPastExercise = exercises.length;
     });
   }
 

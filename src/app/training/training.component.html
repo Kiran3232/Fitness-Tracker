@@ -2,7 +2,10 @@
     <mat-tab label="New Exercise">
         <app-new-training (trainingStart)="ongoingTraining = true"></app-new-training>
     </mat-tab>
-    <mat-tab label="Past Exercises">
+    <mat-tab>
+        <ng-template matTabLabel>
+            <span [matBadge]="countPastExercise" matBadgeOverlap="false">Past Trainings</span>
+        </ng-template>
         <app-past-trainings></app-past-trainings>
     </mat-tab>
 </mat-tab-group>

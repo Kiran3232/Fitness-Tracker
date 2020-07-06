@@ -3,6 +3,8 @@ import { Exercise } from './exercise.model';
 import { Subject, Subscription } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { UIService } from '../shared/ui.service';
+import { User } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +22,12 @@ export class TrainingService {
   private exercises: Exercise[] = [];
 
   constructor(
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private uiService: UIService
   ) { }
 
   fetchAvailableExercises() {
+    /* tslint:disable:no-string-literal */
     this.firebaseSubscriptions.push(this.firestore.collection('availableExercises').snapshotChanges().pipe(map(docArray => {
       return docArray.map(doc => {
         return {
@@ -31,12 +35,16 @@ export class TrainingService {
           name: doc.payload.doc.data()['name'],
           calories: doc.payload.doc.data()['calories'],
           duration: doc.payload.doc.data()['duration']
-        }
-      })
+        };
+      });
     })).subscribe((exercises) => {
       this.availableExercises = exercises;
       this.exercisesChanged.next([...this.availableExercises]);
-    }))
+    },
+      (error) => {
+        this.uiService.showSnackBar('Cannot Load Exercises. Try Again Later', null, 3000);
+      }));
+    /* tslint:enable:no-string-literal */
   }
 
   startExercise(selectedId: string) {
@@ -71,11 +79,13 @@ export class TrainingService {
   }
 
   private addDataToDataStore(exercise: Exercise) {
-    this.firestore.collection('finishedExercises').add(exercise);
+    const userId: User = JSON.parse(sessionStorage.getItem('user'));
+    this.firestore.collection('users/' + userId.uid + '/finishedExercises').add(exercise);
   }
 
   fetchCompletedExercises() {
-    this.firebaseSubscriptions.push(this.firestore.collection('finishedExercises').valueChanges().subscribe((exercises: Exercise[]) => {
+    const userId: User = JSON.parse(sessionStorage.getItem('user'));
+    this.firebaseSubscriptions.push(this.firestore.collection('users/' + userId.uid + '/finishedExercises').valueChanges().subscribe((exercises: Exercise[]) => {
       this.pastExercisesChanged.next(exercises);
     }));
   }

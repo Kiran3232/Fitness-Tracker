@@ -21,3 +21,11 @@ body {
 mat-form-field {
     width: 100%;
 }
+
+.form-group {
+    margin-bottom: 0.5rem !important;
+}
+
+.h-90{
+    height: 90%;
+}
