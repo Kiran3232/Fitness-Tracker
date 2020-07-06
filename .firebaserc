@@ -1,11 +1,5 @@
 {
-  "targets": {
-    "fitness-tracker-3232": {
-      "hosting": {
-        "fitness-tracker": [
-          "fitness-tracker-3232"
-        ]
-      }
-    }
+  "projects": {
+    "default": "fitness-tracker-3232"
   }
 }
