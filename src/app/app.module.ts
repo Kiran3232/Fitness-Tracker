@@ -12,6 +12,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { AuthModule } from './auth/auth.module';
 import { TrainingModule } from './training/training.module';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
+import { AngularFirePerformanceModule, PerformanceMonitoringService } from '@angular/fire/performance';
 
 
 @NgModule({
@@ -28,10 +30,16 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     MaterialModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAnalyticsModule,
+    AngularFirePerformanceModule,
     AuthModule,
     TrainingModule
   ],
-  providers: [],
+  providers: [
+    ScreenTrackingService,
+    UserTrackingService,
+    PerformanceMonitoringService
+  ],
   bootstrap: [AppComponent],
   entryComponents: []
 })
