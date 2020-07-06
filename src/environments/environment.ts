@@ -11,7 +11,8 @@ export const environment = {
     projectId: 'fitness-tracker-3232',
     storageBucket: 'fitness-tracker-3232.appspot.com',
     messagingSenderId: '1040296710771',
-    appId: '1:1040296710771:web:db32b84884e8e0836e5006'
+    appId: '1:1040296710771:web:db32b84884e8e0836e5006',
+    measurementId: "G-C85PBZPYP1"
   }
 };
 
