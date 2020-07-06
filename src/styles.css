@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    max-width: 1980px;
+}
+
+.row {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 0.5rem !important;
+}
+
+.h-90{
+    height: 90%;
+}
